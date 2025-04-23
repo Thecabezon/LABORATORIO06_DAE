@@ -1,5 +1,7 @@
 {% extends "news/base.html" %}
 
+{% load news_extras %}
+
 {% block title %}Home - Django News Portal{% endblock %}
 
 {% block content %}
@@ -19,7 +21,7 @@
                 <img src="{{ article.image.url }}" alt="{{ article.title }}">
             {% endif %}
 
-            <p>{{ article.summary }}</p>
+            <p>{{ article.content|truncate_words_html:30 }}</p>
 
             <div class="article-tags">
                 {% for tag in article.tags.all %}
