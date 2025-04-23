@@ -1,8 +1,12 @@
 from django.urls import path
 from . import views
 
-app_name = 'news'  # Define un namespace para las URLs
+app_name = "news"
 
 urlpatterns = [
-    # Aquí irán las URLs de la aplicación news
+    path("", views.ArticleListView.as_view(), name="home"),
+    path("article/<slug:slug>/", views.ArticleDetailView.as_view(), name="article_detail"),
+    path("category/<slug:slug>/", views.CategoryDetailView.as_view(), name="category_detail"),
+    path("reporter/<int:pk>/", views.ReporterDetailView.as_view(), name="reporter_detail"),
+    path("tag/<slug:slug>/", views.TagDetailView.as_view(), name="tag_detail"),
 ]
