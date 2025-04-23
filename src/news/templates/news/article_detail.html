@@ -1,4 +1,5 @@
 {% extends "news/base.html" %}
+{% load news_extras %}
 
 {% block title %}{{ article.title }} - Django News Portal{% endblock %}
 
@@ -14,6 +15,10 @@
             {% if article.updated_date != article.published_date %}
                 <span>(Updated: {{ article.updated_date|date:"F j, Y H:i" }})</span>
             {% endif %}
+        </div>
+
+        <div class="reading-time">
+            {{ article.content|reading_time }}
         </div>
 
         {% if article.image %}
