@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView
 from .models import Article, Category, Reporter, Tag
+from boletin.models import Noticia  # 👈 nuevo import
 
 class ArticleListView(ListView):
     model = Article
@@ -17,6 +18,7 @@ class ArticleListView(ListView):
         context["recent_articles"] = Article.objects.filter(
             status="published"
         ).order_by("-published_date")[:5]
+        context["boletin_noticias"] = Noticia.objects.all().order_by("-fecha_publicacion")[:5]  # 👈 añadido
         return context
 
 class ArticleDetailView(DetailView):
@@ -35,12 +37,11 @@ class ArticleDetailView(DetailView):
             category=article.category,
             status="published"
         ).exclude(id=article.id)[:3]
-
         context["categories"] = Category.objects.all()
         context["recent_articles"] = Article.objects.filter(
             status="published"
         ).order_by("-published_date")[:5]
-
+        context["boletin_noticias"] = Noticia.objects.all().order_by("-fecha_publicacion")[:5]  # 👈 añadido
         return context
 
 class CategoryDetailView(ListView):
@@ -55,12 +56,11 @@ class CategoryDetailView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["category"] = self.category
-
         context["categories"] = Category.objects.all()
         context["recent_articles"] = Article.objects.filter(
             status="published"
         ).order_by("-published_date")[:5]
-
+        context["boletin_noticias"] = Noticia.objects.all().order_by("-fecha_publicacion")[:5]  # 👈 añadido
         return context
 
 class ReporterDetailView(ListView):
@@ -75,12 +75,11 @@ class ReporterDetailView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["reporter"] = self.reporter
-
         context["categories"] = Category.objects.all()
         context["recent_articles"] = Article.objects.filter(
             status="published"
         ).order_by("-published_date")[:5]
-
+        context["boletin_noticias"] = Noticia.objects.all().order_by("-fecha_publicacion")[:5]  # 👈 añadido
         return context
 
 class TagDetailView(ListView):
@@ -95,10 +94,9 @@ class TagDetailView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["tag"] = self.tag
-
         context["categories"] = Category.objects.all()
         context["recent_articles"] = Article.objects.filter(
             status="published"
         ).order_by("-published_date")[:5]
-
+        context["boletin_noticias"] = Noticia.objects.all().order_by("-fecha_publicacion")[:5]  # 👈 añadido
         return context

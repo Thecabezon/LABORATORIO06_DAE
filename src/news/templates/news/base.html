@@ -113,6 +113,16 @@
                     {% endfor %}
                 {% endblock %}
             </ul>
+
+            <h3>Boletín de Noticias</h3>
+            <ul>
+                {% for noticia in boletin_noticias %}
+                    <li><a href="{% url 'detalle_noticia' noticia.id %}">{{ noticia.titulo }}</a></li>
+                {% empty %}
+                    <li>No hay noticias del boletín aún</li>
+                {% endfor %}
+            </ul>
+
         </aside>
     </div>
 

@@ -1,0 +1,9 @@
+<h1>Boletín de Noticias</h1>
+<ul>
+  {% for noticia in noticias %}
+    <li>
+      <a href="{% url 'detalle_noticia' noticia.id %}">{{ noticia.titulo }}</a> 
+      ({{ noticia.fecha_publicacion|date:"d M Y" }})
+    </li>
+  {% endfor %}
+</ul>
